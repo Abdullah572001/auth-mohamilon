@@ -1,17 +1,26 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router";
-
+import { AuthContext } from "../providers/AuthContext";
 
 const Register = () => {
+  const { createUser } = useContext(AuthContext);
 
-    const handleRegister= e => {
-        e.preventDefault();
+  const handleRegister = (e) => {
+    e.preventDefault();
 
-        const name = e.target.name.value;
-        const email = e.target.email.value;
-        const pass = e.target.password.value;
-        console.log(email, pass, name)
-    }
+    const name = e.target.name.value;
+    const email = e.target.email.value;
+    const pass = e.target.password.value;
+    // console.log(email, pass, name);
+
+    createUser(email, pass)
+      .then(result => {
+        console.log(result.user)
+      })
+      .catch(error => {
+        console.log('ERROR', error.message)
+      })
+  };
 
   return (
     <div>
@@ -44,12 +53,12 @@ const Register = () => {
                   placeholder="Password"
                   name="password"
                 />
-                <button className="btn btn-neutral mt-4">Login</button>
+                <button className="btn btn-neutral mt-4">Register</button>
               </form>
               <p className="">
-                Already have an account? please {" "}
+                Already have an account? please{" "}
                 <Link className="underline" to="/login">
-                   Login
+                  Login
                 </Link>
               </p>
             </div>
