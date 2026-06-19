@@ -4,6 +4,7 @@ import Home from "../components/Home";
 import Login from "../components/Login";
 import Register from "../components/Register";
 import Order from "../components/Order";
+import PrivateRoutes from "./PrivateRoutes";
 
 
 
@@ -26,7 +27,7 @@ export const router = createBrowserRouter([
         },
         {
             path : "/orders",
-            Component : Order
+            element : <PrivateRoutes><Order></Order></PrivateRoutes>
         }
     ]
   },
